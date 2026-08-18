@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class HomeController extends Controller
 {
-    public function __invoke(): Response
+    public function __invoke(): BinaryFileResponse
     {
         return response()->file(public_path('legacy/index.html'));
     }

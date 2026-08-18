@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class LegacyPageController extends Controller
 {
-    public function __invoke(string $page): Response
+    public function __invoke(string $page): BinaryFileResponse
     {
         abort_unless(in_array($page, config('farahidi.legacy_pages'), true), 404);
 
