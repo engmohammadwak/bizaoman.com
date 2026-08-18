@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class HomeController extends Controller
 {
-    public function __invoke(): View
+    public function __invoke(): BinaryFileResponse
     {
-        return view('pages.home');
+        return response()->file(public_path('legacy/index.html'));
     }
 }
