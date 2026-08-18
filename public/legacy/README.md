@@ -1,0 +1,1 @@
+The legacy frontend build should be copied from old/ into this directory locally before running the Laravel application. The Laravel routes serve the legacy HTML pages from public/legacy while the migration to Blade is completed.
