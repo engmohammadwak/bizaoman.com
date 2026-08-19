@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegacyPageController;
 use App\Http\Controllers\ThemeController;
@@ -19,4 +20,5 @@ Route::get('/about-blade', [AboutController::class, 'preview'])->name('about.bla
 Route::get('/about-legacy', function () {
     return response()->file(public_path('legacy/about/index.html'));
 })->name('about.legacy');
+Route::get('/entrepreneurship', EntrepreneurshipController::class)->name('entrepreneurship');
 Route::get('/{page}', LegacyPageController::class)->name('legacy.page');
