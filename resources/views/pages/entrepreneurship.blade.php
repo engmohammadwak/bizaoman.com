@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{{ asset('_next/static/css/45110fd9899fdfe2.css') }}">
-<link rel="stylesheet" href="{{ asset('_next/static/css/35589db532007dfe.css') }}">
+<link rel="stylesheet" href="{{ route('theme.css') }}">
 <title>برامج ريادة الأعمال | بيزه للخدمات المالية</title>
 <meta name="description" content="نرعى الشركات الناشئة ونمكّن رواد الأعمال من تحقيق أحلامهم">
 <link rel="icon" href="{{ asset('biza-logo.png') }}">
