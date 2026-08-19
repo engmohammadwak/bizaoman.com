@@ -11,12 +11,15 @@
 .settings-grid input, .settings-grid textarea, .settings-grid select { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 12px; color: var(--ink); background: #fff; font: inherit; font-weight: 400; }
 .settings-grid textarea { resize: vertical; }
 .settings-save { width: fit-content; border: 0; border-radius: 10px; padding: 12px 18px; color: #fff; background: var(--brand-dark); cursor: pointer; font-weight: 700; }
+.settings-alert { padding: 12px 14px; border-radius: 10px; color: #27655f; background: #e6f2f0; font-weight: 700; }
 .settings-toggle { display: flex !important; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .settings-toggle input { width: auto; accent-color: var(--brand-dark); }
 @media (max-width: 760px) { .settings-grid { grid-template-columns: 1fr; } }
 </style>
-<section class="settings-grid">
-    <article class="admin-panel"><h2>Site information</h2><label>Site name<input type="text" value="BIZA"></label><label>Contact email<input type="email" value="info@biza.om"></label><label>Site description<textarea rows="4">Business and digital services by BIZA.</textarea></label><button class="settings-save" type="button">Save changes</button></article>
-    <article class="admin-panel"><h2>Preferences</h2><label>Default language<select><option>Arabic</option><option>English</option></select></label><label>Timezone<select><option>Asia/Muscat</option><option>Asia/Dubai</option></select></label><label class="settings-toggle"><span>Email notifications</span><input type="checkbox" checked></label><label class="settings-toggle"><span>Maintenance mode</span><input type="checkbox"></label></article>
-</section>
+@if (session('success'))<div class="settings-alert">{{ session('success') }}</div>@endif
+<form method="POST" action="{{ route('admin.settings.update') }}"><div class="settings-grid">
+    @csrf
+    <article class="admin-panel"><h2>Site information</h2><label>Site name<input name="site_name" type="text" value="{{ old('site_name', $settings['site_name']) }}" required></label><label>Contact email<input name="contact_email" type="email" value="{{ old('contact_email', $settings['contact_email']) }}" required></label><label>Site description<textarea name="description" rows="4">{{ old('description', $settings['description']) }}</textarea></label><button class="settings-save" type="submit">Save changes</button></article>
+    <article class="admin-panel"><h2>Preferences</h2><label>Default language<select name="default_language"><option value="ar" @selected(old('default_language', $settings['default_language']) === 'ar')>Arabic</option><option value="en" @selected(old('default_language', $settings['default_language']) === 'en')>English</option></select></label><label>Timezone<select name="timezone"><option value="Asia/Muscat" @selected(old('timezone', $settings['timezone']) === 'Asia/Muscat')>Asia/Muscat</option><option value="Asia/Dubai" @selected(old('timezone', $settings['timezone']) === 'Asia/Dubai')>Asia/Dubai</option></select></label><label class="settings-toggle"><span>Email notifications</span><input name="email_notifications" type="checkbox" value="1" @checked(old('email_notifications', $settings['email_notifications']))></label><label class="settings-toggle"><span>Maintenance mode</span><input name="maintenance_mode" type="checkbox" value="1" @checked(old('maintenance_mode', $settings['maintenance_mode']))></label></article>
+</div></form>
 @endsection
