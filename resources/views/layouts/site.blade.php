@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Farahidi')</title>
+    <title>@yield('title', $siteSettings['site_name'] ?? 'BIZA')</title>
+    @if (!empty($siteSettings['site_favicon']))<link rel="icon" href="{{ route('admin.settings.asset', ['path' => $siteSettings['site_favicon']]) }}">@endif
+    <meta name="description" content="{{ $siteSettings['description'] ?? '' }}">
     @stack('head')
 </head>
 <body>
