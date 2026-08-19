@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard') · BIZA</title>
-    <link rel="icon" href="{{ asset('favicon.png') }}">
+    <title>@yield('title', 'Admin Dashboard') · {{ $siteSettings['site_name'] ?? 'BIZA' }}</title>
+    <link rel="icon" href="{{ !empty($siteSettings['site_favicon']) ? route('admin.settings.asset', ['path' => $siteSettings['site_favicon']]) : asset('favicon.png') }}">
     <style>
-        :root { --brand: #4f8e89; --brand-dark: #376f6b; --ink: #253b3b; --muted: #718080; --surface: #f4f8f7; --line: #dce9e7; }
+        :root { --brand: {{ $siteSettings['primary_color'] ?? '#4f8e89' }}; --brand-dark: {{ $siteSettings['secondary_color'] ?? '#376f6b' }}; --ink: #253b3b; --muted: #718080; --surface: #f4f8f7; --line: #dce9e7; }
         * { box-sizing: border-box; }
         html[dir="rtl"] body { font-family: Tahoma, Arial, sans-serif; }
         body { margin: 0; min-height: 100vh; color: var(--ink); background: var(--surface); font-family: Arial, sans-serif; }

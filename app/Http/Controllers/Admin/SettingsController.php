@@ -13,7 +13,7 @@ class SettingsController extends Controller
 {
     private function defaults(): array
     {
-        return ['site_name'=>'BIZA','contact_email'=>'info@biza.om','description'=>'Business and digital services by BIZA.','default_language'=>'ar','timezone'=>'Asia/Muscat','email_notifications'=>true,'maintenance_mode'=>false,'site_logo'=>null,'site_favicon'=>null];
+        return ['site_name'=>'BIZA','contact_email'=>'info@biza.om','description'=>'Business and digital services by BIZA.','default_language'=>'ar','timezone'=>'Asia/Muscat','email_notifications'=>true,'maintenance_mode'=>false,'site_logo'=>null,'site_favicon'=>null,'primary_color'=>'#4f8e89','secondary_color'=>'#376f6b'];
     }
 
     private function read(): array
@@ -37,7 +37,15 @@ class SettingsController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $settings = $request->validate(['site_name'=>['required','string','max:120'],'contact_email'=>['required','email','max:190'],'description'=>['nullable','string','max:1000'],'default_language'=>['required','in:ar,en'],'timezone'=>['required','string','max:80']]);
+        $settings = $request->validate([
+            'site_name'=>['required','string','max:120'],
+            'contact_email'=>['required','email','max:190'],
+            'description'=>['nullable','string','max:1000'],
+            'default_language'=>['required','in:ar,en'],
+            'timezone'=>['required','string','max:80'],
+            'primary_color'=>['required','regex:/^#[0-9a-fA-F]{6}$/'],
+            'secondary_color'=>['required','regex:/^#[0-9a-fA-F]{6}$/'],
+        ]);
         $current = $this->read();
         $settings['email_notifications'] = $request->boolean('email_notifications');
         $settings['maintenance_mode'] = $request->boolean('maintenance_mode');
