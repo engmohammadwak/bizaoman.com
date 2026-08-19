@@ -3,36 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <header class="admin-topbar">
-        <div>
-            <p class="admin-eyebrow">BIZA website management</p>
-            <h1>Dashboard</h1>
-        </div>
-        <div class="admin-date">{{ now()->format('d M Y') }}</div>
-    </header>
-
-    <section class="admin-stats" aria-label="Overview statistics">
-        @foreach ($stats as $stat)
-            <x-admin.stat-card :label="$stat['label']" :value="$stat['value']" :change="$stat['change']" />
-        @endforeach
-    </section>
-
-    <section class="admin-grid">
-        <article class="admin-panel">
-            <h2>Recent activity</h2>
-            <div class="activity">
-                <div class="activity-item"><div><p class="activity-title">About page updated</p><p class="activity-meta">Blade conversion · Just now</p></div><span class="badge">Updated</span></div>
-                <div class="activity-item"><div><p class="activity-title">New service published</p><p class="activity-meta">Business development · Yesterday</p></div><span class="badge">Published</span></div>
-                <div class="activity-item"><div><p class="activity-title">Contact message received</p><p class="activity-meta">Website form · 2 days ago</p></div><span class="badge">New</span></div>
-            </div>
-        </article>
-        <article class="admin-panel">
-            <h2>Quick actions</h2>
-            <div class="activity">
-                <a class="activity-item" href="{{ url('/about') }}"><div><p class="activity-title">Preview website</p><p class="activity-meta">Open the public site</p></div><span class="badge">Open</span></a>
-                <a class="activity-item" href="#"><div><p class="activity-title">Manage pages</p><p class="activity-meta">Edit site content</p></div><span class="badge">Soon</span></a>
-                <a class="activity-item" href="#"><div><p class="activity-title">Review messages</p><p class="activity-meta">Check visitor inquiries</p></div><span class="badge">Soon</span></a>
-            </div>
-        </article>
-    </section>
+<header class="admin-topbar"><div><p class="admin-eyebrow" data-i18n="eyebrow">BIZA website management</p><h1 data-i18n="dashboard">Dashboard</h1></div><div><button class="language-switcher" type="button" data-language-toggle onclick="setDashboardLanguage(document.documentElement.lang === 'en' ? 'ar' : 'en')">عربي</button><div class="admin-date">{{ now()->format('d M Y') }}</div></div></header>
+<section class="admin-stats" aria-label="Overview statistics">@foreach ($stats as $stat)<x-admin.stat-card :label="$stat['label']" :value="$stat['value']" :change="$stat['change']" />@endforeach</section>
+<section class="admin-grid"><article class="admin-panel"><h2 data-i18n="recent">Recent activity</h2><div class="activity"><div class="activity-item"><div><p class="activity-title">About page updated</p><p class="activity-meta">Blade conversion · Just now</p></div><span class="badge" data-i18n="updated">Updated</span></div><div class="activity-item"><div><p class="activity-title">New service published</p><p class="activity-meta">Business development · Yesterday</p></div><span class="badge" data-i18n="published">Published</span></div><div class="activity-item"><div><p class="activity-title">Contact message received</p><p class="activity-meta">Website form · 2 days ago</p></div><span class="badge" data-i18n="new">New</span></div></div></article><article class="admin-panel"><h2 data-i18n="quick">Quick actions</h2><div class="activity"><a class="activity-item" href="{{ url('/about') }}"><div><p class="activity-title" data-i18n="preview">Preview website</p><p class="activity-meta" data-i18n="previewMeta">Open the public site</p></div><span class="badge" data-i18n="open">Open</span></a><a class="activity-item" href="#"><div><p class="activity-title" data-i18n="manage">Manage pages</p><p class="activity-meta" data-i18n="manageMeta">Edit site content</p></div><span class="badge" data-i18n="soon">Soon</span></a><a class="activity-item" href="#"><div><p class="activity-title" data-i18n="review">Review messages</p><p class="activity-meta" data-i18n="reviewMeta">Check visitor inquiries</p></div><span class="badge" data-i18n="soon">Soon</span></a></div></article></section>
 @endsection

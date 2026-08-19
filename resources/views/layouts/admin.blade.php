@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,7 @@
         .admin-eyebrow { margin: 0 0 6px; color: var(--brand); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
         h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); }
         .admin-date { color: var(--muted); font-size: 14px; }
+        .language-switcher { border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; color: var(--brand-dark); background: #fff; cursor: pointer; font-weight: 700; }
         .admin-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 26px; }
         .stat-card, .admin-panel { border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgba(55,111,107,.06); }
         .stat-card { padding: 22px; }
@@ -39,13 +40,27 @@
         @media (max-width: 900px) { .admin-stats { grid-template-columns: repeat(2, 1fr); } .admin-grid { grid-template-columns: 1fr; } }
         @media (max-width: 640px) { .admin-shell { display: block; } .admin-sidebar { width: auto; padding: 18px; } .admin-brand { margin-bottom: 18px; } .admin-nav { display: flex; flex-wrap: wrap; } .admin-nav a { padding: 9px 11px; font-size: 14px; } .admin-main { padding: 26px 18px; } .admin-topbar { display: block; } .admin-date { margin-top: 10px; } .admin-stats { grid-template-columns: 1fr; } }
     </style>
-    @stack('head')
 </head>
 <body>
     <div class="admin-shell">
         @include('components.admin.sidebar')
         <main class="admin-main">@yield('content')</main>
     </div>
+    <script>
+        const translations = {
+            en: { dir: 'ltr', lang: 'عربي', eyebrow: 'BIZA website management', dashboard: 'Dashboard', pages: 'Pages', services: 'Services', team: 'Team', messages: 'Messages', settings: 'Settings', website: 'View website', recent: 'Recent activity', quick: 'Quick actions', preview: 'Preview website', previewMeta: 'Open the public site', manage: 'Manage pages', manageMeta: 'Edit site content', review: 'Review messages', reviewMeta: 'Check visitor inquiries', updated: 'Updated', published: 'Published', new: 'New', open: 'Open', soon: 'Soon' },
+            ar: { dir: 'rtl', lang: 'English', eyebrow: 'إدارة موقع BIZA', dashboard: 'لوحة التحكم', pages: 'الصفحات', services: 'الخدمات', team: 'الفريق', messages: 'الرسائل', settings: 'الإعدادات', website: 'عرض الموقع', recent: 'آخر النشاطات', quick: 'إجراءات سريعة', preview: 'معاينة الموقع', previewMeta: 'فتح الموقع العام', manage: 'إدارة الصفحات', manageMeta: 'تعديل محتوى الموقع', review: 'مراجعة الرسائل', reviewMeta: 'فحص استفسارات الزوار', updated: 'تم التحديث', published: 'منشور', new: 'جديد', open: 'فتح', soon: 'قريبًا' }
+        };
+        function setDashboardLanguage(language) {
+            const t = translations[language];
+            document.documentElement.lang = language;
+            document.documentElement.dir = t.dir;
+            document.querySelectorAll('[data-i18n]').forEach((element) => { if (t[element.dataset.i18n]) element.textContent = t[element.dataset.i18n]; });
+            document.querySelector('[data-language-toggle]').textContent = t.lang;
+            localStorage.setItem('biza-dashboard-language', language);
+        }
+        document.addEventListener('DOMContentLoaded', () => setDashboardLanguage(localStorage.getItem('biza-dashboard-language') || 'en'));
+    </script>
     @stack('scripts')
 </body>
 </html>
