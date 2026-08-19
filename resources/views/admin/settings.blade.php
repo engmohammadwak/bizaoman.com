@@ -4,27 +4,6 @@
 
 @section('content')
 <header class="admin-topbar"><div class="admin-heading"><p class="admin-eyebrow">{{ $settings['site_name'] ?? 'BIZA' }} website management</p><h1>Settings</h1></div><div class="admin-date">{{ now()->format('d M Y') }}</div></header>
-<style>
-.settings-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
-.settings-grid .admin-panel { display:grid; gap:18px; }
-.settings-grid label { display:grid; gap:8px; color:var(--muted); font-size:14px; font-weight:700; }
-.settings-grid input,.settings-grid textarea,.settings-grid select { width:100%; border:1px solid var(--line); border-radius:10px; padding:12px; color:var(--ink); background:#fff; font:inherit; font-weight:400; }
-.settings-grid textarea { resize:vertical; }
-.settings-toggle { display:flex!important; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); }
-.settings-toggle input { width:auto; accent-color:var(--brand-dark); }
-.settings-save { width:fit-content; border:0; border-radius:10px; padding:12px 18px; color:#fff; background:var(--brand-dark); cursor:pointer; font-weight:700; }
-.settings-alert { margin-bottom:18px; padding:12px 14px; border-radius:10px; color:#27655f; background:#e6f2f0; font-weight:700; }
-.settings-errors { margin-bottom:18px; padding:12px 14px; border-radius:10px; color:#8b3030; background:#fbecec; }
-.brand-preview { max-width:180px; max-height:90px; object-fit:contain; border:1px solid var(--line); border-radius:10px; padding:8px; background:#fff; }
-.preview-box { display:grid; gap:8px; color:var(--muted); font-size:13px; font-weight:700; }
-.preview-box img { display:none; }
-.preview-box.has-preview img { display:block; }
-.settings-section { margin-top:20px; }
-.color-field { display:flex; align-items:center; gap:12px; }
-.color-field input[type=color] { width:52px; height:44px; padding:2px; cursor:pointer; }
-.color-field input[type=text] { flex:1; }
-@media (max-width:760px) { .settings-grid { grid-template-columns:1fr; } }
-</style>
 @if(session('success'))<div class="settings-alert">{{ session('success') }}</div>@endif
 @if($errors->any())<div class="settings-errors"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
